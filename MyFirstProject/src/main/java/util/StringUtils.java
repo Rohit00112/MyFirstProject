@@ -17,10 +17,12 @@ public class StringUtils {
 	public static final String GET_EMAIL = "SELECT COUNT(*) FROM student_info WHERE email = ?";
 	public static final String GET_ALL_STUDENTS = "SELECT * FROM student_info";
 	public static final String DELETE_STUDENT_INFO_BY_ID = "DELETE FROM student_info WHERE id = ?";
-	public static final String UPDATE_STUDENT = "UPDATE student_info SET first_name=?, last_name=?, dob=?, gender=?, email=?, phone_number=?, subject=?, image=? WHERE id=?";
+	public static final String UPDATE_STUDENT = "UPDATE student_info SET "
+	        + "first_name = ?, last_name = ?, dob = ?, gender = ?, email = ?, phone_number = ?, subject = ?, password = ?, image = ? "
+	        + "WHERE user_name = ?";
 	// End SQL Queries
 	
-	public static final String IMAGE_DIR = "/home/arch/eclipse-workspace/MyFirstProject/src/main/webapp/resources/images/";
+	public static final String IMAGE_DIR = "/home/arch/git/repository/MyFirstProject/src/main/webapp/resources/images/";
 
 
 	// Start Parameter names
@@ -75,3 +77,6 @@ public class StringUtils {
 	public static final String STUDENTS_SERVLET = "/StudentServlet";
 	// End Servlet Route
 }
+
+
+// context-type= text/html; file="ksjdksdjlk.jpg"

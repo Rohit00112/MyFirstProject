@@ -172,27 +172,35 @@ public class DatabaseController {
         }
     }
     
-    public int updateStudent(StudentModel updatedStudent) {
+    public int updateStudentInfo(StudentModel studentModel) {
         try (Connection con = getConnection()) {
             PreparedStatement st = con.prepareStatement(StringUtils.UPDATE_STUDENT);
 
-            // Set the updated values in the PreparedStatement
-            st.setString(1, updatedStudent.getFirstName());
-            st.setString(2, updatedStudent.getLastName());
-            st.setDate(3, Date.valueOf(updatedStudent.getDob()));
-            st.setString(4, updatedStudent.getGender());
-            st.setString(5, updatedStudent.getEmail());
-            st.setString(6, updatedStudent.getPhoneNumber());
-            st.setString(7, updatedStudent.getSubject());
-            st.setString(8, updatedStudent.getImageUrlFromPart());
-            st.setInt(9, updatedStudent.getId()); // Update based on student ID
+            // Encrypt password before storing it in the database
+            String encryptedPassword = PasswordEncryptionWIthAes.encryptPassword(studentModel.getPassword(), "U3CdwubLD5yQbUOG92ZnHw==");
+
+            st.setString(1, studentModel.getFirstName());
+            st.setString(2, studentModel.getLastName());
+            st.setDate(3, Date.valueOf(studentModel.getDob()));
+            st.setString(4, studentModel.getGender());
+            st.setString(5, studentModel.getEmail());
+            st.setString(6, studentModel.getPhoneNumber());
+            st.setString(7, studentModel.getSubject());
+            st.setString(8, encryptedPassword);
+            st.setString(9, studentModel.getImageUrlFromPart());
+            st.setString(10, studentModel.getUsername()); // Use username to identify the student to update
 
             int result = st.executeUpdate();
-            return result > 0 ? 1 : 0; // Return 1 if update is successful, otherwise return 0
+            return result > 0 ? 1 : 0;
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace(); // Log the exception for debugging
-            return -1; // Return -1 for any exceptions
+            return -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
         }
     }
 
+    
+   
 }

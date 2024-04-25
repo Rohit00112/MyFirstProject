@@ -44,6 +44,10 @@ public class AuthenticationFilter implements Filter {
 			return;
 		}
 		
+		if (uri.endsWith(".jpg")) {
+			chain.doFilter(request, response);
+			return;
+		}
 		
 		if (uri.endsWith("register.jsp")) {
 			chain.doFilter(req, res);

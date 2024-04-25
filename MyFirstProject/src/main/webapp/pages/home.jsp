@@ -33,52 +33,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-    function openUpdateModal(id, firstName, lastName, dob, gender, email, phoneNumber, subject) {
-        document.getElementById('updateId').value = id;
-        document.getElementById('firstName').value = firstName;
-        document.getElementById('lastName').value = lastName;
-        document.getElementById('dob').value = dob;
-        document.getElementById('gender').value = gender;
-        document.getElementById('email').value = email;
-        document.getElementById('phoneNumber').value = phoneNumber;
-        document.getElementById('subject').value = subject;
-        $('#updateModal').modal('show');
-    }
-    
-    
-    function updateStudent() {
-        var updateData = $('#updateForm').serialize();
-        console.log(updateData);
-        $.ajax({
-            type: 'POST',
-            url: '${pageContext.request.contextPath}/ModifyServlet',
-            data: updateData,
-            success: function(response) {
-                // Handle response from server if needed
-                // For example, you can display a success message or reload the page
-                console.log('Update successful');
-                // Reload the page after successful update
-                
-            },
-            error: function(xhr, status, error) {
-                // Handle error if needed
-                console.error('Error updating student:', error);
-                // Display an error message to the user
-                alert('Error updating student. Please try again later.');
-            }
-        });
-    }
-
-
-    function confirmDelete(userName) {
-        var result = confirm("Are you sure you want to delete this student?");
-        if (result) {
-        	document.getElementById("deleteForm-" + userName).submit();
-        }
-        return false;
-    }
-</script>
 
 </body>
 </html>
